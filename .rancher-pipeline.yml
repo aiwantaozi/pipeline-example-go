@@ -9,25 +9,13 @@ stages:
         cd /go/src/github.com/rancher/pipeline-example-go
         go build -o bin/hello-server
         go test -cover
-    cpuRequest: 103m
-    cpuLimit: 1003m
-    memoryRequest: 100Mi
-    memoryLimit: 1003Mi
 - name: Publish
   steps:
   - publishImageConfig:
       dockerfilePath: ./Dockerfile
       buildContext: .
       tag: example-helloserver:${CICD_EXECUTION_SEQUENCE}
-    cpuRequest: 101m
-    cpuLimit: 1001m
-    memoryRequest: 100Mi
-    memoryLimit: 1001Mi
 - name: Deploy
   steps:
   - applyYamlConfig:
       path: ./deployment.yaml
-    cpuRequest: 102m
-    cpuLimit: 1002m
-    memoryRequest: 100Mi
-    memoryLimit: 1002Mi
